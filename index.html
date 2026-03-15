@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starbucks Order - Coffee Shop</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Fresh Brewed Every Day</p>
+          <h1>It's Time for a Coffee</h1>
+          <p class="subtitle">
+            Order your favorite espresso-style drinks and enjoy warm vibes.
+          </p>
+          <div class="hero-buttons">
+            <a href="#menu" class="btn btn-primary">Browse Menu</a>
+            <a href="#order" class="btn btn-ghost">View Order</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="container">
+        <section id="menu" class="section">
+          <div class="section-head">
+            <p class="tag">Menu</p>
+            <h2>Choose your coffee</h2>
+          </div>
+          <div class="menu-grid" id="menu-grid"></div>
+        </section>
+
+        <section id="order" class="section card order-card">
+          <div class="section-head">
+            <p class="tag">Order</p>
+            <h2>Your Cart</h2>
+          </div>
+          <div class="cart-wrap">
+            <ul id="cart-list" class="cart-list">
+              <li class="empty">Your cart is empty.</li>
+            </ul>
+            <div class="order-total">
+              <span>Total</span>
+              <strong id="total-amount">₹0.00</strong>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="checkout-btn" class="btn btn-primary">Checkout</button>
+            <button id="clear-btn" class="btn btn-ghost">Clear Cart</button>
+          </div>
+          <p id="checkout-msg" class="checkout-msg"></p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const menu = [
+        {
+          name: "Espresso",
+          price: 350,
+          desc: "Bold shot of pure coffee energy.",
+        },
+        {
+          name: "Latte",
+          price: 450,
+          desc: "Creamy steamed milk with espresso.",
+        },
+        {
+          name: "Cappuccino",
+          price: 230,
+          desc: "Frothy foam with balanced flavor.",
+        },
+        {
+          name: "Americano",
+          price: 830,
+          desc: "Espresso with hot water, rich and smooth.",
+        },
+      ];
+
+      const cart = [];
+      const menuGrid = document.getElementById("menu-grid");
+      const cartList = document.getElementById("cart-list");
+      const totalAmount = document.getElementById("total-amount");
+      const checkoutMsg = document.getElementById("checkout-msg");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const clearBtn = document.getElementById("clear-btn");
+
+      function renderMenu() {
+        menuGrid.innerHTML = "";
+        menu.forEach((coffee, index) => {
+          const card = document.createElement("article");
+          card.className = "coffee-card";
+          card.innerHTML = `
+          <div class="coffee-top"><span>☕</span></div>
+          <h3>${coffee.name}</h3>
+          <p>${coffee.desc}</p>
+          <div class="coffee-bottom">
+            <span>₹${coffee.price.toFixed(2)}</span>
+            <button class="btn btn-sm" data-index="${index}">Add to Order</button>
+          </div>
+        `;
+          menuGrid.appendChild(card);
+        });
+        document.querySelectorAll(".coffee-card button").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const idx = Number(btn.dataset.index);
+            addToCart(menu[idx]);
+          });
+        });
+      }
+
+      function addToCart(item) {
+        cart.push(item);
+        checkoutMsg.textContent = `${item.name} added to order.`;
+        renderCart();
+      }
+
+      function renderCart() {
+        cartList.innerHTML = "";
+        if (!cart.length) {
+          cartList.innerHTML = '<li class="empty">Your cart is empty.</li>';
+        } else {
+          cart.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.textContent = `${index + 1}. ${item.name} - ₹${item.price.toFixed(2)}`;
+            cartList.appendChild(li);
+          });
+        }
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        totalAmount.textContent = `₹${total.toFixed(2)}`;
+      }
+
+      checkoutBtn.addEventListener("click", () => {
+        if (cart.length === 0) {
+          checkoutMsg.textContent = "Your cart is empty. Add a coffee first.";
+          checkoutMsg.classList.add("error");
+          return;
+        }
+        checkoutMsg.textContent =
+          "Order confirmed! Thank you for your purchase.";
+        checkoutMsg.classList.remove("error");
+        cart.length = 0;
+        renderCart();
+      });
+
+      clearBtn.addEventListener("click", () => {
+        cart.length = 0;
+        checkoutMsg.textContent = "Order cleared.";
+        checkoutMsg.classList.remove("error");
+        renderCart();
+      });
+
+      renderMenu();
+      renderCart();
+    </script>
+  </body>
+</html>

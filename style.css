@@ -1,0 +1,38 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg:#1d1a16; --panel:#2b2720; --text:#f5efe6; --muted:#cdbca0; --accent:#d39b5d; --accent-2:#8b4f3e; --card:#3a342c; --shadow:0 16px 40px rgba(0,0,0,0.35); }
+body { font-family: "Inter", "Segoe UI", sans-serif; background: radial-gradient(circle at top right, #3d2b19, #1d1a16 58%, #0f0f0d 100%); color: var(--text); min-height:100vh; }
+.page { width:min(1100px, 94vw); margin:0 auto; padding: 1rem 0 2rem; }
+.hero { position:relative; border-radius: 24px; overflow:hidden; background:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; min-height:280px; display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem; }
+.hero-overlay { position:absolute; inset:0; background: linear-gradient(180deg, rgba(17,12,7,0.35), rgba(6, 4, 2, 0.84)); }
+.hero-content { position:relative; z-index:1; text-align:center; max-width:700px; padding:1rem; }
+.eyebrow { text-transform:uppercase; letter-spacing:.2em; color:#f9e4c8; font-weight:700; font-size:.7rem; margin-bottom:.7rem; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom:.4rem; line-height:1.15; }
+.subtitle { color:#f5e9d7; margin-bottom:1rem; font-size:1rem; max-width:640px; margin-inline:auto; }
+.hero-buttons { display:flex; justify-content:center; gap:.7rem; flex-wrap:wrap; }
+.btn { border:none; border-radius:999px; background:#f4f2eb; color:#2c1b11; padding:.52rem 1rem; font-weight:700; cursor:pointer; transition:.2s ease; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+.btn:hover { transform:translateY(-1px); }
+.btn-primary { background:var(--accent); color:#fff; box-shadow:0 8px 20px rgba(0,0,0,.2); }
+.btn-ghost { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff; }
+.container { display:grid; grid-template-columns:1.2fr .8fr; gap:1rem; }
+.section { background:rgba(25,20,13,.65); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1rem; margin-bottom:1rem; }
+.section-head { margin-bottom:.8rem; }
+.tag { text-transform:uppercase; letter-spacing:.16em; color:#f6e4cd; font-size:.7rem; font-weight:700; margin-bottom:.35rem; }
+.section h2 { font-size:1.4rem; color:#fff; }
+.menu-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px,1fr)); gap:.75rem; }
+.coffee-card { background: #2a241d; border:1px solid #3f3427; border-radius:16px; padding:1rem; display:flex; flex-direction:column; gap:.45rem; box-shadow:var(--shadow); }
+.coffee-top { font-size:1.2rem; background:rgba(255,255,255,.06); border-radius:12px; width:2rem; height:2rem; display:flex; align-items:center; justify-content:center; }
+.coffee-card h3 { font-size:1rem; letter-spacing:.01em; margin-top:.1rem; }
+.coffee-card p { color:#c9b49f; font-size:.85rem; margin-bottom:.3rem; line-height:1.4; }
+.coffee-bottom { margin-top:auto; display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.btn-sm { font-size:.75rem; padding:.3rem .6rem; border-radius:8px; background:var(--accent); color:#fff; }
+.card { background:rgba(26,20,11,0.85); }
+.order-card { display:flex; flex-direction:column; gap:.65rem; min-height:320px; }
+.cart-wrap { background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.15); border-radius:12px; padding:.7rem; flex:1; }
+.cart-list { list-style:none; display:flex; flex-direction:column; gap:.2rem; max-height:230px; overflow:auto; padding-right:.2rem; }
+.cart-list li { font-size:.92rem; color:#f7f1e5; }
+.cart-list .empty { color:#c9b49f; font-style:italic; }
+.order-total { margin-top:.8rem; display:flex; justify-content:space-between; border-top:1px solid rgba(255,255,255,.1); padding-top:.45rem; font-size:1rem; font-weight:700; }
+.actions { display:flex; gap:.4rem; flex-wrap:wrap; }
+.checkout-msg { min-height:1.2rem; margin-top:.2rem; color:#bfc7d3; font-size:.9rem; }
+.error { color:#ffb3b3 !important; }
+@media (max-width: 860px) { .container { grid-template-columns:1fr; } .hero { min-height:260px; } }
